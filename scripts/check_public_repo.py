@@ -7,6 +7,7 @@ import io
 import json
 from pathlib import Path
 import re
+import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,8 +47,16 @@ def main():
         require(contract["observation_time"] != contract["label_available_time"], "timing roles")
         secret = re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|"
                             r"\b(?:ghp_|github_pat_|sk-proj-)[A-Za-z0-9_]{20,}")
+        # Local practice data is intentionally ignored, but force-added files
+        # must never bypass the publication check.
+        tracked = subprocess.check_output(
+            ["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
+        require(not any(name.startswith(("data/", "outputs/")) for name in tracked),
+                "runtime data or outputs must not be tracked")
         for path in ROOT.rglob("*"):
             parts = path.relative_to(ROOT).parts
+            if parts[0] in {"data", "outputs"}:
+                continue
             if any(part in {".git", "__pycache__", ".pytest_cache", "node_modules", ".venv"}
                    for part in parts):
                 continue
@@ -81,7 +90,7 @@ def main():
                     "text byte hash")
             path.write_bytes(original + b"\n")
             require(module.hash_report(path)["sha256"] != result["sha256"], "negative control")
-    except (ValueError, KeyError, OSError, IndexError):
+    except (ValueError, KeyError, OSError, IndexError, subprocess.CalledProcessError):
         print("Public repository checks failed; review manifests, fixtures and staged files.")
         return 1
     print("Public repository checks passed. No network, authentication or evaluation was performed.")

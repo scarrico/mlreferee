@@ -1,5 +1,8 @@
 # Accounts, data and interpretation
 
+For a guided first run, see [practice examples](../examples/README.md) and
+[the Codex walkthrough](codex.md). Local preparation needs no service account.
+
 Start by asking your agent to check ML Referee access and credits without
 uploading anything or submitting an evaluation. A plugin install, account
 connection, beta approval and a usable credit balance are separate states.

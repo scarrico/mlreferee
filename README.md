@@ -1,6 +1,6 @@
 # ML Referee
 
-Official integrations, agent instructions, and synthetic examples for
+Official integrations, agent instructions, and reproducible practice examples for
 [mlreferee.com](https://mlreferee.com).
 
 ML Referee evaluates whether candidate features add predictive evidence beyond
@@ -10,6 +10,9 @@ repository does not contain its engine or backend implementation.
 
 ## Start here
 
+- [Practice runs: choose an example](examples/README.md)
+- [Use the examples with Codex](docs/codex.md)
+- [Public bike-demand data: prepare a real feature evaluation](examples/bike-demand/README.md)
 - [Claude connector and plugin](docs/claude.md)
 - [Synthetic regression example and agent prompts](examples/synthetic-regression/README.md)
 - [Compute report SHA-256 locally](examples/report-integrity/README.md)
@@ -33,7 +36,7 @@ by your connection rather than assuming it exists.
 - `plugins/mlreferee/`: self-contained Claude plugin and workflow skill.
 - `.claude-plugin/marketplace.json`: publisher-managed Claude Code catalog.
 - `docs/`: public connection and usage guidance.
-- `examples/`: synthetic input data, prompts, and a local-only hashing utility.
+- `examples/`: synthetic inputs, public-data preparation, agent prompts, and local hashing.
 - `website/`: reserved for website source and public assets.
 
 Private engine code, production deployment tooling, customer reports, reviewer
@@ -45,6 +48,9 @@ should stay separate from the installable plugin. See [contributing](CONTRIBUTIN
 Public integration code, workflow instructions, and synthetic examples are
 [MIT licensed](LICENSE). ML Referee branding and the hosted service are excluded;
 see [NOTICE](NOTICE). This is not an open-source release of the evaluation engine.
+Downloaded third-party datasets retain their own licenses; see each example's
+source notice. Data preparation runs locally without a Referee account. Hosted
+evaluations require a working connection, approval, credits, and your permission.
 
 [Website](https://mlreferee.com) · [Support](https://mlreferee.com/support) ·
 [Beta access](https://mlreferee.com/beta) · [Privacy](https://mlreferee.com/privacy) ·

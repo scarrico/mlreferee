@@ -4,8 +4,11 @@ Use this repository for public-facing integration examples, connector guidance,
 plugin files, and website source. The hosted implementation is maintained
 separately; do not copy private source or its Git history into this repository.
 
-Use a focused branch and review the staged files before pushing. Keep examples
-synthetic and remove secrets, personal contact information, live account/audit
+Use a focused branch and review the staged files before pushing. Examples may
+be synthetic or use reviewed public non-personal data. For public data, record
+its license, source URL, attribution, pinned checksum, transformation and timing
+assumptions. Public availability alone does not make a dataset suitable. Keep
+downloaded data and generated outputs outside Git. Remove secrets, personal contact information, live account/audit
 identifiers, and private URLs from screenshots and documentation. Do not submit
 security reports containing secrets through public issues; use
 [support](https://mlreferee.com/support).
@@ -19,6 +22,7 @@ Before proposing a change:
 
 ```sh
 python3 scripts/check_public_repo.py
+python3 -m unittest discover -s tests -v
 claude plugin validate .
 claude plugin validate plugins/mlreferee
 ```
