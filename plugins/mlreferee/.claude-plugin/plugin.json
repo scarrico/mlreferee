@@ -1,0 +1,20 @@
+{
+  "name": "mlreferee",
+  "displayName": "ML Referee",
+  "version": "1.0.1",
+  "description": "Evaluate candidate features for supervised machine learning and forecasting. Prepare evidence, check access and credits, quote costs, run authorized evaluations, and interpret reports with clear limits.",
+  "author": {
+    "name": "Sandra Carrico",
+    "url": "https://mlreferee.com"
+  },
+  "homepage": "https://mlreferee.com",
+  "license": "MIT",
+  "keywords": [
+    "machine-learning",
+    "feature-selection",
+    "forecasting",
+    "model-evaluation",
+    "research"
+  ],
+  "repository": "https://github.com/scarrico/mlreferee"
+}

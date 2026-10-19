@@ -1,0 +1,12 @@
+{
+  "name": "mlreferee",
+  "description": "Official ML Referee integration previews and workflow skills.",
+  "owner": {"name": "Sandra Carrico"},
+  "plugins": [
+    {
+      "name": "mlreferee",
+      "source": "./plugins/mlreferee",
+      "description": "Preview workflow instructions and connector for ML Referee feature evaluation."
+    }
+  ]
+}

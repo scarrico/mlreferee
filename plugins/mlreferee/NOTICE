@@ -1,0 +1,12 @@
+The MIT license covers the public integration code, workflow instructions,
+documentation, and synthetic examples in this repository.
+
+The ML Referee name and logo, including plugins/mlreferee/assets/logo.png, are
+excluded from the MIT license. The logo identifies the official integration;
+no trademark license or endorsement of modified integrations is implied.
+
+The hosted ML Referee service and its evaluation engine are not included or
+licensed by this repository. Service access and data handling are governed by
+https://mlreferee.com/terms and https://mlreferee.com/privacy.
+
+Third-party materials retain their own licenses and notices.

@@ -1,0 +1,30 @@
+{
+  "task": "regression",
+  "observation_time": "observation_time",
+  "label_available_time": "label_available_time",
+  "entity": "entity",
+  "outcome": "outcome",
+  "baseline": [
+    "baseline"
+  ],
+  "baseline_spec": null,
+  "candidates": [
+    "candidate"
+  ],
+  "sample_weight": null,
+  "batch": null,
+  "representation_analysis": false,
+  "utility": "default",
+  "split": "expanding",
+  "folds": 5,
+  "embargo_seconds": 0,
+  "train_window": 100,
+  "fdr_target": 0.05,
+  "provisional_error_target": 0.1,
+  "selection_error_target": 0.05,
+  "desired_power": 0.8,
+  "target_effect": null,
+  "research_only": true,
+  "deidentified": true,
+  "scope": "feature_quality_only"
+}

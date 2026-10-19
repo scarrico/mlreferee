@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mlreferee": {
+      "type": "http",
+      "url": "https://api.mlreferee.com"
+    }
+  }
+}
