@@ -4,18 +4,138 @@ This is a coding-workspace walkthrough, not Microsoft Copilot, a browser
 chatbot, GitHub's cloud coding agent, or the separate Copilot CLI. Those surfaces
 must not inherit a VS Code compatibility claim.
 
-**Verified October 19–20, 2026:** first sign-in and authenticated MCP calls passed
-on macOS with VS Code 1.137.0 and the official GitHub Copilot integration 0.65.0.
-The optional pinned helper below also passed two real refresh-token exchanges,
-rotation, and a post-restart Copilot check. Native VS Code refresh remains
-unverified. A model-driven synthetic rehearsal with the local file adapter
-passed exact-byte upload, free preflight and a one-credit quote after an initial
-inline CSV attempt was rejected (see below). On October 20, one explicitly
-approved synthetic evaluation completed through the model-driven Copilot session;
-the report and receipt were retrieved, and a locally computed report-text SHA-256
-returned `digest_match`. Exactly one beta credit was consumed. This establishes
-the bounded workflow on this setup, not compatibility with every Copilot surface
-or subscription; natural-expiry and multi-day endurance remain untested.
+**Start here for the complete tested workflow.** On October 20, 2026, Copilot
+completed a synthetic evaluation, retrieved its report and receipt, and verified
+the saved report text against the service's fingerprint. The configuration below
+combines the OAuth helper and exact-file upload adapter used for that workflow.
+It consumed one approved beta credit; always use your actual quote for pricing.
+
+Tested on macOS with VS Code 1.137.0, GitHub Copilot integration 0.65.0,
+Node.js 25.8.1 and `mcp-remote` 0.15.1. New-account onboarding, other platforms
+and natural-expiry renewal remain unverified. The [native connection](#2-connect-referee-in-vs-code)
+is an alternative with verified sign-in and protected calls, but no completed
+evaluation or refresh test on that path.
+
+## Quick start: the complete tested setup
+
+### A. Prepare your workspace
+
+Have Git, Python 3.10+, Node.js/npm and VS Code with GitHub Copilot installed.
+Sign in to Copilot using your own GitHub account. Referee has a separate browser
+sign-in; you do not need an Auth0 administrator account or a client secret.
+
+```sh
+git clone https://github.com/scarrico/mlreferee.git
+cd mlreferee
+python3 scripts/practice.py
+```
+
+If you already cloned the repository, use that checkout. Open the repository
+root in VS Code, so `${workspaceFolder}` refers to the folder containing
+`scripts/` and `examples/`. The practice command runs locally without uploading
+data or spending credits. Review workspace trust and keep tool approvals enabled.
+
+### B. Install the pinned helper
+
+This third-party helper stores OAuth credentials in local JSON files, not the
+OS keychain. Keep its dedicated directory private and outside repositories or
+synced folders. Review the [helper security notes](#copilot-refresh-helper-tested-alternative).
+
+```sh
+umask 077
+mkdir -p "$HOME/.local/share/mlreferee-copilot/helper" "$HOME/.local/share/mlreferee-copilot/auth"
+chmod 700 "$HOME/.local/share/mlreferee-copilot" "$HOME/.local/share/mlreferee-copilot/auth"
+npm install --prefix "$HOME/.local/share/mlreferee-copilot/helper" --ignore-scripts --save-exact mcp-remote@0.15.1
+```
+
+Keep the generated package lock. If an `mlreferee` server is already running,
+stop it through **MCP: List Servers** before replacing that entry.
+
+### C. Add the complete configuration
+
+Create `.vscode/mcp.json` in the repository root. If it already exists, merge or
+replace only the `mlreferee` entry inside `servers`; preserve other entries.
+This configuration includes both the helper and the upload adapter—no additional
+argument insertion is needed.
+
+```json
+{
+  "servers": {
+    "mlreferee": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/scripts/file_upload_mcp.mjs",
+        "--file", "${workspaceFolder}/examples/synthetic-regression/example.csv",
+        "--format", "csv",
+        "--", "node",
+        "${userHome}/.local/share/mlreferee-copilot/helper/node_modules/mcp-remote/dist/proxy.js",
+        "https://api.mlreferee.com",
+        "33418",
+        "--host", "127.0.0.1",
+        "--callback-path", "/",
+        "--transport", "http-only",
+        "--disable-resource-parameter",
+        "--authorize-param", "audience=https://api.mlreferee.com",
+        "--static-oauth-client-info", "{\"client_id\":\"tpc_2rLZHkjkETGk23PQE9inri\",\"token_endpoint_auth_method\":\"none\"}",
+        "--static-oauth-client-metadata", "{\"scope\":\"audit:read audit:write offline_access\",\"grant_types\":[\"authorization_code\",\"refresh_token\"],\"token_endpoint_auth_method\":\"none\"}"
+      ],
+      "env": {
+        "MCP_REMOTE_CONFIG_DIR": "${userHome}/.local/share/mlreferee-copilot/auth"
+      }
+    }
+  }
+}
+```
+
+The client ID is public. If VS Code cannot find Node, replace both `"node"`
+values with your Node executable's absolute path. The example uses VS Code path
+variables; the live test used absolute paths. The adapter reads only the configured
+synthetic file. Review a new dataset before changing `--file`, then restart the
+server. The adapter's limit is 1,000,000 bytes; it accepts UTF-8 CSV or JSON.
+
+### D. Connect and check access
+
+Use **MCP: List Servers** to start `mlreferee`, review the trust prompt, and enable
+its tools in a local Copilot agent session. Ask:
+
+> Read AGENTS.md. Call ML Referee's live describe_referee, get_referee_readiness
+> and get_credits tools, and show their actual responses. Do not upload data,
+> request beta access or submit an evaluation.
+
+The protected credits call triggers Referee sign-in. Complete browser login and
+consent yourself, then return to VS Code. Never paste tokens or passwords into
+chat. If access is pending, follow the [new-customer checklist](coding-agents.md#new-customer-checklist).
+Sign-in alone does not grant beta approval or credits.
+
+### E. Upload, review the quote, then approve the evaluation
+
+Compute the approved fixture's fingerprint locally:
+
+```sh
+shasum -a 256 examples/synthetic-regression/example.csv
+```
+
+Once ready, explicitly authorize the synthetic upload and ask:
+
+> Upload the configured synthetic file with upload_private_dataset_file, using
+> its locally computed expected_sha256 and retention_seconds 86400. Confirm
+> local_file_verification.server_manifest_match is true. Use the unchanged
+> examples/synthetic-regression/contract.json for live preflight and one quote.
+> Show the actual cost and scope. Stop before submission. On a mismatch or
+> uncertain upload outcome, stop without retrying or reconnecting.
+
+Review the quote. When you approve its scope and cost, use the
+[submission and result prompts](../examples/synthetic-regression/prompts.md)
+to submit once, wait for completion and retrieve the report and receipt. Save
+the exact returned report text privately before expiry and follow the
+[report-text verification steps](../examples/report-integrity/README.md#when-only-report-text-is-available).
+Do not ask the model to reconstruct CSV or report text from a rendered chat.
+The 24-hour input window starts at upload; completion does not reset it.
+
+You now have the complete first-run path. The sections below explain alternatives,
+the completed tests and troubleshooting; you do not need to install a second
+connection after following this quick start.
 
 ## 1. Open the public repository
 
