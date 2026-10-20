@@ -52,13 +52,19 @@ even while service access is pending.
 | Codex CLI 0.163.0 on local macOS | Fresh OAuth login; actual discovery and readiness through Codex's app-server | Refresh and a complete authorized evaluation; new-account signup |
 | Codex CLI 0.144.4 | Sign-in rehearsal failed due to resource handling | Use the tested 0.163.0 recipe, not this older version |
 | Codex desktop | Workspace walkthrough written | Separate fresh-connection rehearsal; CLI results do not establish desktop compatibility |
-| GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS | First browser sign-in and actual authenticated MCP calls; connected, authorized, ready | Persistent sign-in/refresh, new-account onboarding and a complete authorized evaluation |
+| GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS, native HTTP connection | First browser sign-in and actual authenticated MCP calls; connected, authorized, ready | Native refresh, new-account onboarding and a complete authorized evaluation |
+| Same Copilot setup with optional mcp-remote 0.15.1 helper | Offline-access consent; two real refresh exchanges with rotation; protected calls after each and through Copilot after restart | Natural-expiry scheduling, long-running sessions and a complete authorized evaluation |
 
 No directory approval, free-tier entitlement, or universal client compatibility
 is implied. Your coding-agent subscription and Referee beta credits are separate.
 A dedicated public Codex client is configured; follow the exact
 [tested CLI connection recipe](codex.md). Copilot has its own
-[tested first-login recipe](copilot.md); refresh remains unverified for both.
+[tested first-login recipe](copilot.md) and an optional
+[tested refresh helper](copilot.md#copilot-refresh-helper-tested-alternative).
+The helper adds third-party software and a local JSON credential store, not an
+OS keychain. Review its security notes before choosing it. Native Copilot and
+Codex refresh remain unverified; the helper's bounded test does not establish
+natural-expiry renewal or multi-day endurance.
 Users do not need an Auth0 administrator account or a shared application secret.
 See the [sign-in acceptance checklist](codex-auth-readiness.md).
 

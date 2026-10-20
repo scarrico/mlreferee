@@ -25,8 +25,9 @@ The [coding-agent guides](docs/coding-agents.md) separate runnable local exercis
 from hosted connection tests. Codex CLI 0.163.0 on local macOS has passed fresh
 sign-in and authenticated discovery/readiness; refresh and a full evaluation
 remain pending. GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS also passed first
-sign-in and authenticated MCP calls; persistent sign-in and a full evaluation
-remain unverified. No chatbot setup is required for
+sign-in and authenticated MCP calls. Its optional pinned helper also passed two
+refresh-token exchanges, rotation and a post-restart check; native VS Code refresh,
+natural-expiry renewal and a full evaluation remain unverified. No chatbot setup is required for
 local practice. Start with `python3 scripts/practice.py` from this folder.
 
 The Claude plugin is a **preview**, not a directory-approved or authenticated
