@@ -10,9 +10,9 @@ spend credits automatically.
 | [Bike-demand forecasting](bike-demand/README.md) | Download licensed real data, construct six candidates without using same-hour observations, reserve later data | Not for preparation; yes for hosted evaluation |
 | [Report integrity](report-integrity/README.md) | Hash an issued report locally and compare with its receipt | Local hashing does not; service verification does |
 
-For Tom and other Codex users: [start here](../docs/codex.md). Claude users can
-use the same staged prompts after connecting through a supported client; see
-[integration status](../docs/claude.md). Prompts are instructions to your agent,
+Choose [Codex or GitHub Copilot](../docs/coding-agents.md), or run the commands
+yourself. Start with `python3 scripts/practice.py` for an offline rehearsal.
+Prompts are instructions to your agent,
 not an installer or a substitute for a working authenticated connection.
 
 ## The common workflow

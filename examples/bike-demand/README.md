@@ -112,7 +112,10 @@ At each later validation cutoff, fit only on outcomes whose declared availabilit
 precedes that cutoff; respect the reporting delay at the evaluation/holdout
 boundary too. The preparation script creates files, not a downstream training loop.
 
-## 4. Have Codex or another agent guide the hosted run
+## 4. Have your coding agent guide the hosted run
+
+Choose [Codex or GitHub Copilot](../../docs/coding-agents.md). No browser-chatbot
+integration is required for the local exercises.
 
 Open [the staged prompts](prompts.md). First explain and review the files, then
 discover current tools and the `general_ml` schema. Stop if the client cannot

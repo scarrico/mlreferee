@@ -11,7 +11,7 @@ repository does not contain its engine or backend implementation.
 ## Start here
 
 - [Practice runs: choose an example](examples/README.md)
-- [Use the examples with Codex](docs/codex.md)
+- [Use your coding agent: Codex or GitHub Copilot](docs/coding-agents.md)
 - [Public bike-demand data: prepare a real feature evaluation](examples/bike-demand/README.md)
 - [Claude connector and plugin](docs/claude.md)
 - [Synthetic regression example and agent prompts](examples/synthetic-regression/README.md)
@@ -20,6 +20,12 @@ repository does not contain its engine or backend implementation.
 - [Website source workspace](website/README.md)
 
 ## Integration status
+
+The [coding-agent guides](docs/coding-agents.md) separate runnable local exercises
+from hosted connection tests. Codex CLI 0.163.0 on local macOS has passed fresh
+sign-in and authenticated discovery/readiness; refresh and a full evaluation
+remain pending. Copilot is not yet verified. No chatbot setup is required for
+local practice. Start with `python3 scripts/practice.py` from this folder.
 
 The Claude plugin is a **preview**, not a directory-approved or authenticated
 Claude release. Its connection configuration is prepared for the Claude endpoint;

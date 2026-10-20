@@ -37,7 +37,8 @@ for `outcome`?** Each row is a made-up observation. `entity` groups observations
 answer becomes available. `outcome` must never be included among the predictors.
 The baseline is an input feature here, not a supplied production model or score.
 
-Open this folder in Codex and follow [the Codex guide](../../docs/codex.md).
+Open this folder in your coding agent and follow
+[the Codex or Copilot guide](../../docs/coding-agents.md).
 Then use [prompts.md](prompts.md) one step at a time: readiness and schema,
 preparation, upload/preflight/quote approval, approval of the displayed quote,
 then result retrieval. If no supported connection is available, stop after the

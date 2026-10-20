@@ -1,9 +1,10 @@
 # Codex sign-in: implementation and verification process
 
-Status: **planned; ML Referee end-to-end Codex sign-in is not yet verified.**
-Last assessed: October 19, 2026. This document is a release checklist, not a
-working installation recipe. Start with [the current Codex guide](codex.md)
-for local examples and its explicit connection limitations.
+Status: **partial acceptance: fresh Codex CLI login and authenticated tools passed;
+refresh and a complete evaluation remain unverified.**
+Last assessed: October 19, 2026 (Pacific). Use [the tested CLI recipe](codex.md).
+This checklist records what passed and what remains; it is not a claim that
+every client surface or end-to-end example is ready.
 
 ## Intended customer experience
 
@@ -20,22 +21,33 @@ shared service identity.
 
 ## What has been checked
 
-- Codex CLI 0.144.4 locally exposes `--oauth-client-id` and `--oauth-resource`
-  on `codex mcp add`, and supports `codex mcp login`.
+- Official Codex CLI 0.163.0 on local macOS completed fresh credential acquisition
+  for a dedicated public/native client. The browser already had an existing
+  Referee account session; the user accepted new consent. New-account signup
+  and password entry were not tested. The global CLI was not replaced.
+- `describe_referee` and `get_referee_readiness` returned live connected/authorized
+  status and existing credit availability through the official Codex app-server
+  MCP tool-call interface, using Codex-managed OAuth credentials. This was not
+  a manual token probe. No model-driven evaluation, upload, quote or credit use
+  was tested. Account identifiers and balances are omitted from public evidence.
 - Public authorization discovery advertises S256 PKCE, public-client token
   authentication (`none`), refresh grants, and issuer-bound responses. It does
   not currently advertise automatic client registration through DCR or CIMD.
-- These are capability observations, **not evidence of a successful Codex login**.
-  An existing ChatGPT or Claude connection does not establish native Codex support.
+- The configured rotating-refresh policy is seven days of inactivity and a
+  30-day maximum. A configured policy and initial token exchange do not prove
+  that a real refresh succeeds; that gate remains pending.
+- Existing ChatGPT readiness passed. Public tool schemas remained unchanged;
+  Claude authenticated access was not independently retested.
 
 ## Publisher-side work
 
-The candidate design is a dedicated public/native OAuth client for Codex, using
-authorization code with S256 PKCE and no distributed application secret. Confirm
-provider support before choosing it; do not repurpose the existing confidential
-ChatGPT or hosted Claude client.
+A dedicated third-party Native public OAuth client was created with explicit
+owner approval, authorization-code/PKCE, no distributed application secret,
+and an exact fixed loopback callback. Only user-delegated Referee read/write
+permissions and refresh were configured; machine-to-machine access is disabled.
+Existing ChatGPT and Claude clients were not repurposed or changed.
 
-Publisher responsibilities:
+Ongoing publisher responsibilities:
 
 - Obtain approval for identity-provider changes and record them privately.
 - Establish the client, exact redirect matching, least-privilege user-delegated
@@ -50,8 +62,8 @@ Publisher responsibilities:
 - Keep credentials, raw tokens, account identifiers, authorization URLs, and
   operator deployment/configuration evidence out of this public repository.
 
-Creating this checklist does not authorize production or identity-provider edits.
-The candidate design is not final until the fresh-connection tests below pass.
+Future provider changes need their own authorization. Successful setup does not
+close the remaining acceptance gates below.
 
 ## Acceptance tests
 
@@ -61,23 +73,32 @@ desktop, and remote execution environments must not inherit one another's pass.
 
 | Check | Required evidence | Status |
 | --- | --- | --- |
-| Fresh setup | Exact install command or UI steps work without prior Referee tokens or a client secret | Pending |
-| Browser sign-in | Correct ML Referee account signs in and consent returns successfully to Codex | Pending |
-| Authenticated tools | Discovery and readiness calls succeed; an MCP server merely appearing in a list is insufficient | Pending |
+| Fresh setup | Exact pinned CLI/config recipe works without prior tokens for the new client or a shared secret | Passed: CLI 0.163.0, local macOS |
+| Browser sign-in | Existing account SSO plus new consent returns successfully to Codex | Passed; new-account signup not tested |
+| Authenticated tools | Discovery and readiness calls succeed through Codex's managed MCP connection | Passed via app-server tool-call RPC; no model-driven workflow tested |
 | Beta request | With explicit permission, a request returns pending status and a private request identifier, without an evaluation | Pending |
-| Approval and credits | Operator approves the intended account; a later readiness call shows the actual allocation | Pending |
+| Approval and credits | Readiness shows the existing account's access and balance | Read passed; a new approval/grant was not tested |
 | Token refresh | A real refresh exchange and subsequent authenticated call succeed without reconnecting | Pending |
-| Existing integrations | Read-only ChatGPT and Claude checks still succeed without changed permissions or balances | Pending |
+| Existing integrations | Read-only checks succeed without changed permissions or balances | ChatGPT passed; Claude authenticated check pending; public schemas unchanged |
+| Full example | Approved upload, preflight, quote, submission and result retrieval | Pending separate upload and quote authorization |
+| Other clients | Desktop, IDE, other OS, remote execution and Copilot rehearsals | Not tested |
 
 Do not spend evaluation credits merely to test sign-in. Do not shorten shared
 token lifetimes, revoke other sessions, grant credits to the wrong account, or
 treat token issuance as proof of refresh. Any separate evaluation requires its
 own upload and quote approval.
 
-## Troubleshooting to verify before publication
+## Observed setup issues
 
-These are diagnostic categories, not observed error messages. Capture sanitized
-messages from the actual rehearsal; never invent text and label it tested.
+- CLI 0.144.4 generated a trailing-slash resource that Auth0 did not recognize.
+- An explicit `oauth_resource` override caused a duplicate resource parameter,
+  including in 0.163.0. Omitting it allowed 0.163.0 to discover the exact resource.
+- The first generated callback was unregistered. The dedicated client now has
+  the exact callback and matching fixed listener port in the setup guide.
+- Explicit scopes avoided the older CLI's unintended default profile scopes.
+
+The categories below remain general diagnostic guidance, not additional observed
+errors. Never publish account identifiers, tokens, or raw authorization URLs.
 
 | Symptom | Diagnostic direction |
 | --- | --- |
@@ -87,14 +108,20 @@ messages from the actual rehearsal; never invent text and label it tested.
 | Connected but no credits | Check beta approval separately from authentication; do not retry evaluations |
 | Session stops working later | Inspect refresh behavior privately; do not request tokens in support messages |
 
-## Publish the verified guide
+## Complete the remaining gates
 
-After the required checks pass, update `docs/codex.md` in the same repository:
+There is no documented force-refresh MCP CLI/RPC action in this rehearsal.
+Credentials are in the OS-managed store. Do not extract or modify them, revoke
+sessions, or shorten shared token lifetimes to manufacture a refresh test.
+Observe a natural-expiry refresh exchange and a subsequent authenticated call.
+A manual token grant, if separately authorized, would not establish Codex-managed
+refresh behavior.
 
-- Replace `CONFIRMED_MCP_URL` with the tested connection instructions and any
-  required public client identifier/configuration. Never include a client secret.
-- Include the browser flow, expected readiness response, beta request and
-  approval steps, and observed troubleshooting messages with sensitive fields removed.
+When additional checks pass, update `docs/codex.md` in the same repository:
+
+- Preserve the tested public client settings and exact recipe. Never include a secret.
+- Add any newly verified beta-request, approval, refresh and full-example steps,
+  with sensitive fields removed and untested steps still clearly identified.
 - Publish the test date, minimum tested version, supported surface/platform,
   and remaining limitations. Keep unsupported surfaces explicitly pending.
 - Record a sanitized pass/fail summary here. Keep raw provider logs, reviewer
@@ -102,8 +129,9 @@ After the required checks pass, update `docs/codex.md` in the same repository:
 - Run repository checks and review the exact staged files and commit identity
   before pushing. Use the configured GitHub no-reply email.
 
-Until then, local data preparation is usable, but direct Codex authentication
-must not be advertised as ready for ordinary customers.
+The connection recipe is tested only to the scope stated above. Do not advertise
+full workflow, automatic refresh, directory approval or broader client support
+from the initial connection result.
 
 ## References
 
