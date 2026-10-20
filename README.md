@@ -22,15 +22,25 @@ repository does not contain its engine or backend implementation.
 ## Integration status
 
 The [coding-agent guides](docs/coding-agents.md) separate runnable local exercises
-from hosted connection tests. Codex CLI 0.163.0 on local macOS has passed fresh
-sign-in, authenticated discovery/readiness and the approved synthetic evaluation
-through its managed MCP connection, including report-text verification. Refresh,
-new-account onboarding and a model-driven conversation remain untested.
-GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS also passed first
-sign-in and authenticated MCP calls. Its optional pinned helper also passed two
-refresh-token exchanges, rotation and a post-restart check; native VS Code refresh,
-natural-expiry renewal and a full evaluation remain unverified. No chatbot setup is required for
-local practice. Start with `python3 scripts/practice.py` from this folder.
+from hosted connection tests. As of October 19, 2026, the tested scope is:
+
+| Path | Completed | Remaining |
+| --- | --- | --- |
+| [Codex CLI 0.163.0, macOS](docs/codex.md) | Sign-in; synthetic upload, preflight, approved one-credit evaluation, result/receipt retrieval and report-text fingerprint verification through its managed MCP connection | A complete model-driven conversation, token refresh and new-account onboarding |
+| [Copilot 0.65.0 / VS Code 1.137.0, macOS](docs/copilot.md) | Sign-in; model-driven exact-file upload, valid preflight and one-credit quote using the local file adapter | Evaluation submission and result retrieval; new-account onboarding |
+| [Optional Copilot refresh helper](docs/copilot.md#copilot-refresh-helper-tested-alternative) | Two real refresh exchanges, credential rotation and successful calls after restart | Natural-expiry renewal and long-running sessions; native VS Code refresh is separate and unverified |
+
+The Codex evaluation consumed exactly one beta credit. The Copilot rehearsal
+stopped at its quote and consumed none. These are synthetic workflow tests,
+not evidence of real-world predictive performance or universal client support.
+Private reports, credentials and account identifiers are excluded from this repo.
+
+Start with `python3 scripts/practice.py` for local practice without an account.
+Then follow the chosen client guide and the
+[staged synthetic example](examples/synthetic-regression/README.md), approving
+upload and quoted spending separately. The optional Copilot helper stores
+credentials in restricted local JSON files, not the OS keychain; review its
+security notes before installing it.
 
 The Claude plugin is a **preview**, not a directory-approved or authenticated
 Claude release. Its connection configuration is prepared for the Claude endpoint;
