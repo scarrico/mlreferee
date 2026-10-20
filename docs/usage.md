@@ -54,7 +54,7 @@ alone does not establish a working Referee integration.
 | What you see | What to do next |
 | --- | --- |
 | No tools, sign-in failure or expired session | Stop hosted actions. Follow the [Codex connection guide](codex.md#2-connect-codex-cli) or [Copilot connection guide](copilot.md#2-connect-referee-in-vs-code). Review any browser consent yourself. Do not borrow credentials, disable TLS checks or edit Auth0 settings. |
-| Connected, but beta access is pending | Follow the [new-customer checklist](coding-agents.md#new-customer-checklist). Request access once with permission, then wait for human approval. Signup alone grants neither approval nor credits. |
+| Connected, but beta access is pending | Follow the [access and evaluation steps](coding-agents.md#from-connected-to-evaluated). Request access once with permission, then wait for human approval. Signup alone grants neither approval nor credits. |
 | Insufficient or expired credits | Check the live balance and expiration, compare them with the current quote, and stop before submission. Contact support about access; do not assume a grant, purchase or refund. |
 | Upload fails, its hash differs, or its outcome is unclear | Do not approve reconstructed or altered data. Check the original file and the client's supported file-upload path. If an upload may already have succeeded, recover its status before retrying; a matching row count is not proof of matching bytes. |
 | Preflight rejects the input or contract | Read the actual errors. Correct only a justified preparation mistake, and get approval for any change to the declared evaluation. Do not relax evidence requirements just to pass. |
@@ -62,7 +62,7 @@ alone does not establish a working Referee integration.
 | Report is expired or its fingerprint differs | A receipt cannot reconstruct expired report contents. Check the exact bytes and the selected [verification representation](../examples/report-integrity/README.md). Never use the expected receipt hash as your computed hash. Any rerun needs separate authorization. |
 
 For a queued or running evaluation, check the existing job at reasonable
-intervals; do not resubmit. See [recovery and stop conditions](coding-agents.md#recovery-and-stop-conditions)
+intervals; do not resubmit. See [from connected to evaluated](coding-agents.md#from-connected-to-evaluated)
 for the staged workflow.
 
 ### Asking for help

@@ -27,7 +27,7 @@ the workflow without exposing business data.
    if only report text is available, use its text-verification instructions.
 
 For an existing account, you can go straight to your client guide. For pending
-access, follow the [new-customer checklist](docs/coding-agents.md#new-customer-checklist).
+access, follow the [access and evaluation steps](docs/coding-agents.md#from-connected-to-evaluated).
 If something fails, start with [troubleshooting](docs/usage.md#troubleshooting).
 
 ### After your first run
@@ -46,7 +46,7 @@ from hosted connection tests. As of October 19, 2026, the tested scope is:
 | Path | Completed | Remaining |
 | --- | --- | --- |
 | [Codex CLI 0.163.0, macOS](docs/codex.md) | Sign-in; synthetic upload, preflight, approved one-credit evaluation, result/receipt retrieval and report-text fingerprint verification through its managed MCP connection | A complete model-driven conversation, token refresh and new-account onboarding |
-| [Copilot 0.65.0 / VS Code 1.137.0, macOS](docs/copilot.md) | Sign-in; model-driven exact-file upload, valid preflight and one-credit quote using the local file adapter | Evaluation submission and result retrieval; new-account onboarding |
+| [Copilot 0.65.0 / VS Code 1.137.0, macOS](docs/copilot.md) | Sign-in; a separate rehearsal reached exact-file upload, valid preflight and a one-credit quote using an unpublished local adapter | Adapter publication; evaluation submission and result retrieval; new-account onboarding |
 | [Optional Copilot refresh helper](docs/copilot.md#copilot-refresh-helper-tested-alternative) | Two real refresh exchanges, credential rotation and successful calls after restart | Natural-expiry renewal and long-running sessions; native VS Code refresh is separate and unverified |
 
 The Codex evaluation consumed exactly one beta credit. The Copilot rehearsal
