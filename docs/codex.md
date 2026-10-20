@@ -29,6 +29,10 @@ and ask it to use the included fixture without any download.
 
 ## 2. Check whether Codex can actually call Referee
 
+The [versioned sign-in readiness checklist](codex-auth-readiness.md) tracks the
+publisher-side work and fresh-connection tests still needed. It is not yet a
+tested end-to-end installation guide.
+
 If ML Referee is already connected, ask:
 
 > Use ML Referee's read-only discovery and readiness tools. Check the current
