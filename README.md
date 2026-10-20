@@ -38,6 +38,17 @@ If something fails, start with [troubleshooting](docs/usage.md#troubleshooting).
 - [Claude preview integration](docs/claude.md): separate setup and test status.
 - [Website source workspace](website/README.md).
 
+## Connect your account with OAuth
+
+ML Referee uses Auth0 to let you authorize supported clients to access your
+Referee account. Sign in through the browser and approve the connection; the
+client then sends an access token with protected MCP calls. Separate client
+registrations serve ChatGPT, hosted Claude, Codex and Copilot in VS Code.
+You do not need an Auth0 administrator account or a shared client secret.
+Referee still checks beta access, credits and the scope of each operation.
+See [how account authorization works](docs/authentication.md), including the
+tested status for each client and the separate approval for evaluation spending.
+
 ## Integration status
 
 The [coding-agent guides](docs/coding-agents.md) separate runnable local exercises
@@ -48,6 +59,7 @@ from hosted connection tests. As of October 19, 2026, the tested scope is:
 | [Codex CLI 0.163.0, macOS](docs/codex.md) | Sign-in; synthetic upload, preflight, approved one-credit evaluation, result/receipt retrieval and report-text fingerprint verification through its managed MCP connection | A complete model-driven conversation, token refresh and new-account onboarding |
 | [Copilot 0.65.0 / VS Code 1.137.0, macOS](docs/copilot.md) | Sign-in; model-driven exact-file upload, valid preflight and a one-credit quote using the included [local file adapter](docs/copilot.md#upload-the-configured-file-directly) | Evaluation submission and result retrieval; new-account onboarding |
 | [Optional Copilot refresh helper](docs/copilot.md#copilot-refresh-helper-tested-alternative) | Two real refresh exchanges, credential rotation and successful calls after restart | Natural-expiry renewal and long-running sessions; native VS Code refresh is separate and unverified |
+| [Hosted Claude web connection](docs/claude.md) | Browser sign-in, authenticated discovery/readiness and refresh-token issuance | Actual refresh exchange, evaluation workflow and directory credential coordination; Claude Code needs its own sign-in test |
 
 The Codex evaluation consumed exactly one beta credit. The Copilot rehearsal
 stopped at its quote and consumed none. These are synthetic workflow tests,
@@ -61,10 +73,10 @@ upload and quoted spending separately. The optional Copilot helper stores
 credentials in restricted local JSON files, not the OS keychain; review its
 security notes before installing it.
 
-The Claude plugin is a **preview**, not a directory-approved or authenticated
-Claude release. Its connection configuration is prepared for the Claude endpoint;
-server activation, OAuth configuration, and a real Claude sign-in rehearsal are
-still required. Installing files alone does not establish a working connection.
+The Claude plugin remains a **preview**. The hosted Claude web connection passed
+sign-in and authenticated calls; Claude Code authentication and directory review
+remain separate. Installing plugin files alone does not establish a working
+connection. See the [Claude status and setup guide](docs/claude.md).
 
 The existing OpenAI submission is under review. This repository does not contain
 or replace its submitted ZIP, and it does not imply OpenAI or Anthropic approval.

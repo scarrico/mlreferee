@@ -1,8 +1,10 @@
 # Claude connector and plugin
 
-**Preview:** configuration and instructions are available here, but real Claude
-authentication and directory review are not complete. Do not infer service
-availability from local package validation.
+**Preview:** the hosted Claude web connection passed browser sign-in and
+authenticated MCP discovery/readiness on October 19, 2026. Auth0 issued a refresh
+token, but its actual renewal exchange remains untested. Claude Code sign-in,
+the evaluation workflow and directory credential coordination remain pending.
+Local package validation does not establish those additional capabilities.
 
 ## Two complementary integrations
 
@@ -13,9 +15,15 @@ the evaluation engine locally.
 
 The plugin source is [plugins/mlreferee](../plugins/mlreferee/README.md). Its
 configured Claude server URL is `https://api.mlreferee.com` (origin root). That
-transport and its OAuth setup must be activated and tested before a real Claude
-connection is claimed. The established `/mcp` endpoint is used by the existing
-OpenAI integration; do not change either endpoint by guessing a fallback.
+transport is deployed, and the hosted Claude web rehearsal completed OAuth
+sign-in and protected calls. The established `/mcp` endpoint is used by the
+existing OpenAI integration; use each client's exact setup guide.
+
+Referee uses Auth0 to let you authorize Claude to access your Referee account
+on your behalf. The hosted Claude connection has its own OAuth registration
+and Referee read/write permissions. Users sign in and approve browser consent;
+they do not create an Auth0 application or provide an administrator credential.
+See [how account authorization works](authentication.md).
 
 Users should authorize through their client's secure connection interface.
 Never paste a password, client secret, access token, or invitation code into a
@@ -36,8 +44,8 @@ claude plugin validate .
 claude plugin validate plugins/mlreferee
 ```
 
-After the compatibility and sign-in prerequisites above are complete, the
-publisher-managed Claude Code catalog can be registered and installed with:
+The publisher-managed Claude Code catalog can be registered and installed with
+the commands below. Claude Code authentication still needs its own rehearsal:
 
 ```text
 /plugin marketplace add scarrico/mlreferee
