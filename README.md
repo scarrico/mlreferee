@@ -10,14 +10,33 @@ repository does not contain its engine or backend implementation.
 
 ## Start here
 
-- [Practice runs: choose an example](examples/README.md)
-- [Use your coding agent: Codex or GitHub Copilot](docs/coding-agents.md)
-- [Public bike-demand data: prepare a real feature evaluation](examples/bike-demand/README.md)
-- [Claude connector and plugin](docs/claude.md)
-- [Synthetic regression example and agent prompts](examples/synthetic-regression/README.md)
-- [Compute report SHA-256 locally](examples/report-integrity/README.md)
-- [Accounts, data, consent, and limitations](docs/usage.md)
-- [Website source workspace](website/README.md)
+Your first question is simple: **does one proposed input improve prediction
+beyond the input you already have?** Start with made-up data so you can learn
+the workflow without exposing business data.
+
+1. **Try it locally.** Follow [the first exercise](docs/coding-agents.md#start-locally-no-referee-account-required).
+   You need Git and Python 3.10+, but no Referee account. Nothing is uploaded.
+2. **Connect your coding agent.** Choose [Codex](docs/codex.md) or
+   [GitHub Copilot in VS Code](docs/copilot.md). Use the tested client-specific
+   recipe; complete browser consent yourself, then check beta access and credits.
+3. **Run the small example.** Follow the [synthetic walkthrough](examples/synthetic-regression/README.md)
+   and its [copy-and-paste prompts](examples/synthetic-regression/prompts.md).
+   Approve the exact upload first, then approve the returned quote separately.
+4. **Keep the evidence.** Save the actual report and receipt privately before
+   expiry. Follow [report verification](examples/report-integrity/README.md);
+   if only report text is available, use its text-verification instructions.
+
+For an existing account, you can go straight to your client guide. For pending
+access, follow the [new-customer checklist](docs/coding-agents.md#new-customer-checklist).
+If something fails, start with [troubleshooting](docs/usage.md#troubleshooting).
+
+### After your first run
+
+- [Bike-demand forecasting](examples/bike-demand/README.md): prepare licensed real
+  data, six candidate inputs and a reserved later period.
+- [All practice examples](examples/README.md) and [data/consent rules](docs/usage.md).
+- [Claude preview integration](docs/claude.md): separate setup and test status.
+- [Website source workspace](website/README.md).
 
 ## Integration status
 
@@ -49,8 +68,8 @@ still required. Installing files alone does not establish a working connection.
 
 The existing OpenAI submission is under review. This repository does not contain
 or replace its submitted ZIP, and it does not imply OpenAI or Anthropic approval.
-The new agent download tool is not deployed; discover the tools actually exposed
-by your connection rather than assuming it exists.
+Discover the tools actually exposed by your connection rather than assuming
+that a particular download or evaluation capability exists.
 
 ## Repository layout
 

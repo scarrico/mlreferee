@@ -10,7 +10,9 @@ spend credits automatically.
 | [Bike-demand forecasting](bike-demand/README.md) | Download licensed real data, construct six candidates without using same-hour observations, reserve later data | Not for preparation; yes for hosted evaluation |
 | [Report integrity](report-integrity/README.md) | Hash an issued report locally and compare with its receipt | Local hashing does not; service verification does |
 
-Choose [Codex or GitHub Copilot](../docs/coding-agents.md), or run the commands
+New here? Follow [Start here](../README.md#start-here), starting with synthetic
+regression before the larger bike-demand exercise. Choose
+[Codex or GitHub Copilot](../docs/coding-agents.md), or run the local commands
 yourself. Start with `python3 scripts/practice.py` for an offline rehearsal.
 Prompts are instructions to your agent,
 not an installer or a substitute for a working authenticated connection.
@@ -26,10 +28,10 @@ not an installer or a substitute for a working authenticated connection.
 6. **Save and follow up.** Preserve the actual report before expiry. Validate a
    chosen change on later data before making deployment decisions.
 
-No hosted performance result is supplied or promised. The synthetic example is
-a workflow exercise, not product evidence; the public-data example is not a
-claim that every candidate will help. The scripts do not implement Referee's
-evaluation engine.
+The synthetic walkthrough records one completed hosted test, not a promised
+result for your data. It is a workflow exercise, not evidence of real-world
+predictive performance; the public-data example is not a claim that every
+candidate will help. The scripts do not implement Referee's evaluation engine.
 
 ## Before you start
 
@@ -64,3 +66,5 @@ python3 scripts/check_public_repo.py
 
 [Support](https://mlreferee.com/support) can help with access. Never send passwords,
 tokens, OAuth secrets, private datasets, or unredacted tool transcripts.
+For account, credit, upload and report issues, see the
+[shared troubleshooting guide](../docs/usage.md#troubleshooting).

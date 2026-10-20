@@ -1,7 +1,8 @@
 # Accounts, data and interpretation
 
-For a guided first run, see [practice examples](../examples/README.md) and
-[the Codex walkthrough](codex.md). Local preparation needs no service account.
+For a guided first run, follow [Start here](../README.md#start-here), then choose
+[Codex](codex.md) or [GitHub Copilot in VS Code](copilot.md).
+Local preparation needs no service account.
 
 Start by asking your agent to check ML Referee access and credits without
 uploading anything or submitting an evaluation. A plugin install, account
@@ -47,3 +48,32 @@ transactions. Bounded repairs require prospective confirmation on new labels.
 The language model and the agent harness are separate. MCP support, OAuth,
 file access and local hashing depend on the harness; a provider's model API
 alone does not establish a working Referee integration.
+
+## Troubleshooting
+
+| What you see | What to do next |
+| --- | --- |
+| No tools, sign-in failure or expired session | Stop hosted actions. Follow the [Codex connection guide](codex.md#2-connect-codex-cli) or [Copilot connection guide](copilot.md#2-connect-referee-in-vs-code). Review any browser consent yourself. Do not borrow credentials, disable TLS checks or edit Auth0 settings. |
+| Connected, but beta access is pending | Follow the [new-customer checklist](coding-agents.md#new-customer-checklist). Request access once with permission, then wait for human approval. Signup alone grants neither approval nor credits. |
+| Insufficient or expired credits | Check the live balance and expiration, compare them with the current quote, and stop before submission. Contact support about access; do not assume a grant, purchase or refund. |
+| Upload fails, its hash differs, or its outcome is unclear | Do not approve reconstructed or altered data. Check the original file and the client's supported file-upload path. If an upload may already have succeeded, recover its status before retrying; a matching row count is not proof of matching bytes. |
+| Preflight rejects the input or contract | Read the actual errors. Correct only a justified preparation mistake, and get approval for any change to the declared evaluation. Do not relax evidence requirements just to pass. |
+| Quote expires or submission times out | Before submission, obtain a current quote and reconfirm any changed scope or cost. After a possible submission, recover the existing job using its identifiers and supported retry key; do not create a replacement run blindly. |
+| Report is expired or its fingerprint differs | A receipt cannot reconstruct expired report contents. Check the exact bytes and the selected [verification representation](../examples/report-integrity/README.md). Never use the expected receipt hash as your computed hash. Any rerun needs separate authorization. |
+
+For a queued or running evaluation, check the existing job at reasonable
+intervals; do not resubmit. See [recovery and stop conditions](coding-agents.md#recovery-and-stop-conditions)
+for the staged workflow.
+
+### Asking for help
+
+Use the public [support form](https://mlreferee.com/support). Include:
+
+- The coding client, version and operating system.
+- The step that failed and a sanitized error message.
+- Whether a job was submitted or the outcome is uncertain. Provide its request
+  or audit identifier privately only if support needs it.
+
+Never include passwords, OAuth secrets, access tokens, full authorization URLs,
+raw logs or evaluation datasets. Use the same form for privacy or deletion
+inquiries. Support requests do not authorize a new evaluation or credit spending.
