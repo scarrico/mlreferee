@@ -81,7 +81,7 @@ desktop, and remote execution environments must not inherit one another's pass.
 | Token refresh | A real refresh exchange and subsequent authenticated call succeed without reconnecting | Pending |
 | Existing integrations | Read-only checks succeed without changed permissions or balances | ChatGPT passed; Claude authenticated check pending; public schemas unchanged |
 | Full example | Approved upload, preflight, quote, submission and result retrieval | Pending separate upload and quote authorization |
-| Other clients | Desktop, IDE, other OS, remote execution and Copilot rehearsals | Not tested |
+| Other Codex surfaces | Desktop, IDE, other OS and remote execution rehearsals | Not tested; separate [Copilot first-login results](copilot.md) do not establish Codex compatibility |
 
 Do not spend evaluation credits merely to test sign-in. Do not shorten shared
 token lifetimes, revoke other sessions, grant credits to the wrong account, or
