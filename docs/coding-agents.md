@@ -48,8 +48,9 @@ even while service access is pending.
 | Client or component | Verified here | Still needed |
 | --- | --- | --- |
 | Shared Python exercises | Local checks and preparation tests | Hosted preflight and evaluation under separate authorization |
+| Synthetic regression through Codex 0.163.0's managed MCP connection | Upload, valid preflight, approved one-credit submission, completion, result/receipt retrieval and locally hashed report-text verification | Model-driven conversation and original result-JSON byte download/verification |
 | Public UCI bike data | Pinned archive verified; 7,920 evaluation rows, 672 reserved rows and six candidates prepared and structurally checked | Live schema, preflight and approved evaluation |
-| Codex CLI 0.163.0 on local macOS | Fresh OAuth login; actual discovery and readiness through Codex's app-server | Refresh and a complete authorized evaluation; new-account signup |
+| Codex CLI 0.163.0 on local macOS | Fresh OAuth login; actual discovery/readiness and the synthetic evaluation workflow through Codex's app-server | Refresh, model-driven conversation and new-account signup |
 | Codex CLI 0.144.4 | Sign-in rehearsal failed due to resource handling | Use the tested 0.163.0 recipe, not this older version |
 | Codex desktop | Workspace walkthrough written | Separate fresh-connection rehearsal; CLI results do not establish desktop compatibility |
 | GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS, native HTTP connection | First browser sign-in and actual authenticated MCP calls; connected, authorized, ready | Native refresh, new-account onboarding and a complete authorized evaluation |

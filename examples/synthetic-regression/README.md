@@ -59,3 +59,31 @@ validation with five folds and declares the complete one-candidate family.
 The prompts deliberately stop for quote approval. No command in this example
 automatically uploads data, requests beta access, purchases credits or submits
 an evaluation. Read the quote rather than inferring a fixed price.
+
+## Completed hosted workflow check — October 19, 2026
+
+Through the official Codex CLI 0.163.0 app-server's managed MCP connection on
+macOS, the unchanged fixture and contract completed the hosted workflow:
+
+- Upload accepted: 400 synthetic rows, six columns, 24-hour input retention.
+- Preflight returned `valid: true` with `generic_refit` baseline mode.
+- The contract-bound quote returned **one beta credit**. After explicit approval,
+  the evaluation was submitted once and completed; exactly one credit was consumed.
+  This is an observed cost, not a fixed-price promise.
+- The actual result and receipt were retrieved. The report text was saved without
+  an added newline, hashed locally, and verified with `representation: report_text`.
+  The service returned `digest_match`.
+
+The returned finding was `strong_incremental_feature_evidence` for the synthetic
+candidate. Squared-error reduction was approximately **3.819**, with a reported
+95% interval of **[3.324, 4.376]** and positive improvements in all five folds.
+This demonstrates the example workflow, not real-world model performance.
+The result retains `scope: feature_quality_opinion_only`; its assumptions and
+actual error calibration are not established by a passing example. The measured
+comparison uses the generic refit baseline, not a customer's production model.
+
+These were real client tool calls, not a model-driven Codex conversation;
+Copilot's full example remains a separate test. The saved MCP response is an
+envelope, not an original downloaded result-JSON artifact. Only the exact report
+text was fingerprint-verified. A match confirms consistency, not correctness.
+Private upload identifiers, account details and responses are not published here.

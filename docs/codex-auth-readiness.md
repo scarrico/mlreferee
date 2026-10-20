@@ -1,7 +1,7 @@
 # Codex sign-in: implementation and verification process
 
 Status: **partial acceptance: fresh Codex CLI login and authenticated tools passed;
-refresh and a complete evaluation remain unverified.**
+refresh and a model-driven conversation remain unverified.**
 Last assessed: October 19, 2026 (Pacific). Use [the tested CLI recipe](codex.md).
 This checklist records what passed and what remains; it is not a claim that
 every client surface or end-to-end example is ready.
@@ -80,7 +80,7 @@ desktop, and remote execution environments must not inherit one another's pass.
 | Approval and credits | Readiness shows the existing account's access and balance | Read passed; a new approval/grant was not tested |
 | Token refresh | A real refresh exchange and subsequent authenticated call succeed without reconnecting | Pending |
 | Existing integrations | Read-only checks succeed without changed permissions or balances | ChatGPT passed; Claude authenticated check pending; public schemas unchanged |
-| Full example | Approved upload, preflight, quote, submission and result retrieval | Pending separate upload and quote authorization |
+| Synthetic example | Approved upload, preflight, quote, submission and result retrieval | Passed via managed MCP tool calls: one credit; report and receipt retrieved; locally hashed report text returned digest_match. Model-driven conversation and original result-JSON byte verification remain untested |
 | Other Codex surfaces | Desktop, IDE, other OS and remote execution rehearsals | Not tested; separate [Copilot first-login results](copilot.md) do not establish Codex compatibility |
 
 Do not spend evaluation credits merely to test sign-in. Do not shorten shared

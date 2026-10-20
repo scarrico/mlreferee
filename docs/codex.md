@@ -41,7 +41,10 @@ and ask it to use the included fixture without any download.
 Codex OAuth login and real discovery/readiness tool calls succeeded through
 Codex's own app-server using its managed credentials. The browser used an
 existing Referee account session and new consent; new-account signup was not
-tested. Refresh and a complete evaluation remain separate acceptance checks.
+tested. The [synthetic evaluation](../examples/synthetic-regression/README.md#completed-hosted-workflow-check--october-19-2026)
+subsequently completed through that managed MCP connection: approved one-credit
+submission, result/receipt retrieval and local report-text fingerprint verification.
+Refresh and a model-driven conversation remain separate acceptance checks.
 See [the detailed test status](codex-auth-readiness.md).
 
 Codex desktop, the IDE extension, Windows, Linux, remote environments and Copilot

@@ -23,8 +23,10 @@ repository does not contain its engine or backend implementation.
 
 The [coding-agent guides](docs/coding-agents.md) separate runnable local exercises
 from hosted connection tests. Codex CLI 0.163.0 on local macOS has passed fresh
-sign-in and authenticated discovery/readiness; refresh and a full evaluation
-remain pending. GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS also passed first
+sign-in, authenticated discovery/readiness and the approved synthetic evaluation
+through its managed MCP connection, including report-text verification. Refresh,
+new-account onboarding and a model-driven conversation remain untested.
+GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS also passed first
 sign-in and authenticated MCP calls. Its optional pinned helper also passed two
 refresh-token exchanges, rotation and a post-restart check; native VS Code refresh,
 natural-expiry renewal and a full evaluation remain unverified. No chatbot setup is required for
