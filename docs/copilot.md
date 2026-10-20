@@ -8,7 +8,10 @@ must not inherit a VS Code compatibility claim.
 on macOS with VS Code 1.137.0 and the official GitHub Copilot integration 0.65.0.
 The optional pinned helper below also passed two real refresh-token exchanges,
 rotation, and a post-restart Copilot check. Native VS Code refresh remains
-unverified. No evaluation was run or ML Referee credits spent. This is not a full
+unverified. A model-driven synthetic rehearsal with the local file adapter
+passed exact-byte upload, free preflight and a one-credit quote after an initial
+inline CSV attempt was rejected (see below). No evaluation was run or ML Referee
+credits spent. This is not a full
 evaluation acceptance test or a claim of compatibility with every Copilot surface
 or subscription; natural-expiry and multi-day endurance remain untested.
 
@@ -99,10 +102,124 @@ the evaluation. Connecting alone does not authorize any of those actions.
   multi-process contention were not exercised. Reauthorization may still be needed.
 - **New-user onboarding:** this rehearsal used an existing Referee account, not
   a newly approved beta account or a new credit grant.
-- **Full evaluation:** uploads, preflight, quotes, evaluation submission and
-  result retrieval were not exercised in this connection test.
+- **Full evaluation:** exact-byte upload, preflight and a quote passed with the
+  local file adapter. Evaluation submission and result retrieval remain
+  unverified through this Copilot setup and require separate authorization.
 - **Other environments:** Windows, Linux, remote workspaces, browser VS Code,
   and other Copilot surfaces need separate verification.
+
+## Synthetic upload rehearsal: stopped before transmission
+
+On October 19, 2026, the helper-backed Copilot agent completed live schema and
+readiness checks and read the unchanged public synthetic fixture and contract.
+The owner authorized upload, free preflight and a quote only, not submission.
+The proposed raw-CSV MCP upload requested 86,400-second retention and contained
+400 data rows, but its bytes did not match the approved local file:
+
+| Artifact | Bytes | SHA-256 |
+| --- | --- | --- |
+| Public `examples/synthetic-regression/example.csv` | 46,785 | `98d7ffbc1707e0044832e54cc859e1010326799f6d409d18ac4e350e21892c45` |
+| Proposed tool argument, rejected before upload | 46,749 | `c9089b98d937b8151486af614aa590e26d8849bd68babdfbd9b3376343480087` |
+
+The one-time upload confirmation was declined. No dataset was uploaded, no
+preflight or quote was obtained, and no evaluation was submitted in this test.
+This is an input-delivery failure, not a Referee statistical result or a claim
+that authentication failed. Copilot/provider usage is separate from Referee
+evaluation credits.
+
+Do not treat a model's reconstruction of CSV text as an exact file transfer,
+even if row and column counts agree. Before approving a raw-data upload, compare
+the exact decoded tool argument's UTF-8 bytes with the original file. If they
+differ, stop; do not silently change the fixture or approve a near-match. A
+file adapter below addresses this by reading the configured file itself.
+
+The subsequent model-driven rehearsal through this same Copilot connection
+passed with the adapter:
+
+- One upload returned a server input manifest with **46,785 bytes** and SHA-256
+  **`98d7ffbc1707e0044832e54cc859e1010326799f6d409d18ac4e350e21892c45`**, exactly
+  matching the original file. Retention was **86,400 seconds**.
+- Actual preflight returned **`valid: true`**, **400 rows**, **6 columns**, and
+  **`baseline_mode: generic_refit`**.
+- The preflight and quote arguments preserved every field of the unchanged
+  public contract: regression, one baseline, the full one-candidate family,
+  five expanding folds, and `scope: feature_quality_only` under `general_ml`.
+- The actual quote cost was **1 beta credit**. A stable quote idempotency key
+  was used. The agent stopped at the quote: no evaluation was submitted and no
+  Referee credit was consumed or reserved by this rehearsal.
+
+The first adapter response put local verification evidence in an additional
+text block; Copilot preferred the structured service result and omitted that
+block. The server manifest itself was independently inspected and matched. The
+adapter now also places the local evidence in `structuredContent`, with an
+offline regression assertion for that client behavior. This presentation fix
+was not used to justify another upload. Account, upload and quote identifiers
+are intentionally omitted here.
+
+### Upload the configured file directly
+
+The public `scripts/file_upload_mcp.mjs` adapter adds one **local** tool,
+`upload_private_dataset_file`, in front of the existing authenticated stdio
+transport. Its small arguments contain the expected file SHA-256 and retention;
+the model never reconstructs the CSV. The adapter reads the one configured file,
+preserves its exact UTF-8 bytes, and calls the existing service upload tool. It
+checks the returned input manifest's SHA-256 and byte count before reporting a
+match. It does not add a hosted tool or change the published connector package.
+
+Use the helper setup below first. Stop only `mlreferee` in **MCP: List Servers**.
+In that server's `args` array, insert these arguments **before** the existing
+`mcp-remote/dist/proxy.js` path, retaining all later arguments and the existing
+credential-directory environment setting:
+
+```json
+"${workspaceFolder}/scripts/file_upload_mcp.mjs",
+"--file", "${workspaceFolder}/examples/synthetic-regression/example.csv",
+"--format", "csv",
+"--", "node"
+```
+
+This recipe assumes VS Code opened this public repository. If your workspace is
+elsewhere, use absolute paths to the adapter and the exact approved input file.
+Use your Node executable's absolute path instead of the inner `node` argument if
+VS Code cannot find it. Preserve the outer server `command` and OAuth options.
+Restart the server, review its configuration/trust prompt, and keep tool
+approvals enabled. Only the configured file is available to the added tool;
+the agent cannot choose another path through its arguments. Changing the file
+configuration requires reviewing and authorizing the newly selected dataset.
+
+Check the original file locally:
+
+```sh
+shasum -a 256 examples/synthetic-regression/example.csv
+node --test tests/file_upload_mcp.test.mjs
+```
+
+After explicitly authorizing that synthetic upload, ask Copilot:
+
+> Use upload_private_dataset_file with the locally computed expected_sha256
+> and retention_seconds 86400. Do not reconstruct or paste CSV into another
+> tool. Confirm local_file_verification.server_manifest_match is true, then
+> preflight this upload using the unchanged synthetic contract.json and obtain
+> one quote with a stable quote idempotency key. Show cost, scope and retention.
+> Stop before submission or credit spending. On a hash mismatch or uncertain
+> upload outcome, stop without retrying or reconnecting.
+
+The adapter accepts regular, non-symlink CSV/JSON files up to 1,000,000 bytes and
+rejects invalid UTF-8. All beta-data and consent requirements still apply; a
+checksum does not certify a dataset's suitability. Keep private files outside
+this public repository. The adapter uses Node's standard library and leaves
+credential handling with the configured transport. It does not read token files
+or log datasets. Existing transport logging/privacy considerations still apply.
+This is a file-transfer helper, not a sandbox or an authorization system:
+the original remote tools remain available, and the client must still obtain
+your approval for uploads and evaluation spending.
+
+Within one adapter session, repeating the same completed file/retention request
+returns the saved upload result without another upload. This is not server-side
+idempotency or persistence across restarts. After any failed/uncertain upload,
+recover its returned identifier if available or contact support; do not restart
+the adapter to bypass the one-attempt guard. Removing the adapter arguments and
+restarting restores the original helper configuration.
 
 ## Copilot refresh helper: tested alternative
 
