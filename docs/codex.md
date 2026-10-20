@@ -44,7 +44,9 @@ existing Referee account session and new consent; new-account signup was not
 tested. The [synthetic evaluation](../examples/synthetic-regression/README.md#completed-hosted-workflow-check--october-19-2026)
 subsequently completed through that managed MCP connection: approved one-credit
 submission, result/receipt retrieval and local report-text fingerprint verification.
-Refresh and a model-driven conversation remain separate acceptance checks.
+Refresh and a completed model-driven conversation remain separate acceptance
+checks. A bounded model-driven rehearsal completed discovery but stopped at an
+interactive readiness elicitation; it did not establish end-to-end success.
 See [the detailed test status](codex-auth-readiness.md).
 
 Codex desktop, the IDE extension, Windows, Linux, remote environments and Copilot

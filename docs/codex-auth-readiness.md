@@ -1,7 +1,8 @@
 # Codex sign-in: implementation and verification process
 
-Status: **partial acceptance: fresh Codex CLI login and authenticated tools passed;
-refresh and a model-driven conversation remain unverified.**
+Status: **partial acceptance: fresh Codex CLI login, authenticated tools, and the
+approved synthetic evaluation with report-text verification passed through the
+managed MCP connection; refresh and a model-driven conversation remain unverified.**
 Last assessed: October 19, 2026 (Pacific). Use [the tested CLI recipe](codex.md).
 This checklist records what passed and what remains; it is not a claim that
 every client surface or end-to-end example is ready.
@@ -28,14 +29,25 @@ shared service identity.
 - `describe_referee` and `get_referee_readiness` returned live connected/authorized
   status and existing credit availability through the official Codex app-server
   MCP tool-call interface, using Codex-managed OAuth credentials. This was not
-  a manual token probe. No model-driven evaluation, upload, quote or credit use
-  was tested. Account identifiers and balances are omitted from public evidence.
+  a manual token probe. That initial sign-in check did not upload data, quote or
+  spend credits. The subsequent approved synthetic test completed upload,
+  preflight, a one-credit evaluation, result/receipt retrieval and local report-text
+  SHA-256 verification (`digest_match`). See the
+  [completed workflow record](../examples/synthetic-regression/README.md#completed-hosted-workflow-check--october-19-2026).
+  Neither check used a model-driven conversation. Account identifiers and
+  balances are omitted from public evidence.
 - Public authorization discovery advertises S256 PKCE, public-client token
   authentication (`none`), refresh grants, and issuer-bound responses. It does
   not currently advertise automatic client registration through DCR or CIMD.
 - The configured rotating-refresh policy is seven days of inactivity and a
   30-day maximum. A configured policy and initial token exchange do not prove
   that a real refresh succeeds; that gate remains pending.
+- A separate bounded model-driven app-server rehearsal completed
+  `describe_referee`, but `get_referee_readiness` raised an interactive MCP
+  elicitation request. The test harness declined unexpected interaction and
+  readiness did not complete. This is an incomplete interactive-client test,
+  not proof of bad credentials or a passing model-driven workflow. No upload,
+  evaluation or credit spending occurred in that rehearsal.
 - Existing ChatGPT readiness passed. Public tool schemas remained unchanged;
   Claude authenticated access was not independently retested.
 
@@ -76,6 +88,7 @@ desktop, and remote execution environments must not inherit one another's pass.
 | Fresh setup | Exact pinned CLI/config recipe works without prior tokens for the new client or a shared secret | Passed: CLI 0.163.0, local macOS |
 | Browser sign-in | Existing account SSO plus new consent returns successfully to Codex | Passed; new-account signup not tested |
 | Authenticated tools | Discovery and readiness calls succeed through Codex's managed MCP connection | Passed via app-server tool-call RPC; no model-driven workflow tested |
+| Model-driven interaction | The model completes discovery and protected readiness through the client | Partial: discovery passed; readiness required an interactive elicitation that the bounded harness declined |
 | Beta request | With explicit permission, a request returns pending status and a private request identifier, without an evaluation | Pending |
 | Approval and credits | Readiness shows the existing account's access and balance | Read passed; a new approval/grant was not tested |
 | Token refresh | A real refresh exchange and subsequent authenticated call succeed without reconnecting | Pending |

@@ -82,8 +82,25 @@ The result retains `scope: feature_quality_opinion_only`; its assumptions and
 actual error calibration are not established by a passing example. The measured
 comparison uses the generic refit baseline, not a customer's production model.
 
-These were real client tool calls, not a model-driven Codex conversation;
-Copilot's full example remains a separate test. The saved MCP response is an
+These were real client tool calls, not a model-driven Codex conversation.
+The saved MCP response is an
 envelope, not an original downloaded result-JSON artifact. Only the exact report
 text was fingerprint-verified. A match confirms consistency, not correctness.
 Private upload identifiers, account details and responses are not published here.
+
+## Completed Copilot workflow check — October 20, 2026
+
+The same unchanged fixture and contract also completed a model-driven local
+Copilot session in VS Code on macOS, using the optional refresh helper and
+[file adapter](../../docs/copilot.md#upload-the-configured-file-directly).
+The server upload manifest matched the original file bytes and SHA-256;
+preflight was valid. Following explicit approval, a fresh one-credit quote was
+submitted once and the evaluation completed. The actual report and receipt were
+retrieved; report text was extracted directly from the client's MCP result
+artifact, saved as exact UTF-8, hashed locally and verified as `report_text`.
+The service returned `digest_match`. Exactly one beta credit was consumed and
+none remained reserved. This was a separate evaluation from the Codex check.
+
+Private reports and identifiers remain outside this repository. Original
+result-JSON download verification, other client surfaces, and other evaluation
+paths do not inherit this pass. See the [Copilot test record](../../docs/copilot.md#completed-evaluation-and-report-verification--october-20-2026).

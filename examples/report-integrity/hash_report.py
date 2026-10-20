@@ -19,15 +19,27 @@ def hash_report(path, include_text=False):
     return result
 
 
+def hash_report_text(path):
+    """Hash exact saved UTF-8 report text without newline normalization."""
+    raw = path.read_bytes()
+    raw.decode("utf-8")  # Reject invalid UTF-8; never silently replace bytes.
+    return {"representation": "report_text",
+            "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("report", type=Path)
-    parser.add_argument("--include-text", action="store_true")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--include-text", action="store_true")
+    modes.add_argument("--text-file", action="store_true",
+                       help="Hash an exact UTF-8 report-text file, not JSON")
     args = parser.parse_args()
     try:
-        result = hash_report(args.report, args.include_text)
+        result = (hash_report_text(args.report) if args.text_file else
+                  hash_report(args.report, args.include_text))
     except (OSError, ValueError):
-        parser.exit(1, "Could not hash an original report file; check the path and JSON format.\n")
+        parser.exit(1, "Could not hash the report; check the path and selected JSON/UTF-8 format.\n")
     print(json.dumps(result, indent=2))
 
 

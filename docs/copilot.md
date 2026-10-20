@@ -4,15 +4,17 @@ This is a coding-workspace walkthrough, not Microsoft Copilot, a browser
 chatbot, GitHub's cloud coding agent, or the separate Copilot CLI. Those surfaces
 must not inherit a VS Code compatibility claim.
 
-**Verified October 19, 2026:** first sign-in and authenticated MCP calls passed
+**Verified October 19–20, 2026:** first sign-in and authenticated MCP calls passed
 on macOS with VS Code 1.137.0 and the official GitHub Copilot integration 0.65.0.
 The optional pinned helper below also passed two real refresh-token exchanges,
 rotation, and a post-restart Copilot check. Native VS Code refresh remains
 unverified. A model-driven synthetic rehearsal with the local file adapter
 passed exact-byte upload, free preflight and a one-credit quote after an initial
-inline CSV attempt was rejected (see below). No evaluation was run or ML Referee
-credits spent. This is not a full
-evaluation acceptance test or a claim of compatibility with every Copilot surface
+inline CSV attempt was rejected (see below). On October 20, one explicitly
+approved synthetic evaluation completed through the model-driven Copilot session;
+the report and receipt were retrieved, and a locally computed report-text SHA-256
+returned `digest_match`. Exactly one beta credit was consumed. This establishes
+the bounded workflow on this setup, not compatibility with every Copilot surface
 or subscription; natural-expiry and multi-day endurance remain untested.
 
 ## 1. Open the public repository
@@ -102,9 +104,9 @@ the evaluation. Connecting alone does not authorize any of those actions.
   multi-process contention were not exercised. Reauthorization may still be needed.
 - **New-user onboarding:** this rehearsal used an existing Referee account, not
   a newly approved beta account or a new credit grant.
-- **Full evaluation:** exact-byte upload, preflight and a quote passed with the
-  local file adapter. Evaluation submission and result retrieval remain
-  unverified through this Copilot setup and require separate authorization.
+- **Other evaluation paths:** the single-candidate synthetic regression workflow
+  passed. Campaigns, repair, provided-score mode and the bike-demand example have
+  not received a complete Copilot evaluation rehearsal.
 - **Other environments:** Windows, Linux, remote workspaces, browser VS Code,
   and other Copilot surfaces need separate verification.
 
@@ -155,6 +157,41 @@ adapter now also places the local evidence in `structuredContent`, with an
 offline regression assertion for that client behavior. This presentation fix
 was not used to justify another upload. Account, upload and quote identifiers
 are intentionally omitted here.
+
+## Completed evaluation and report verification — October 20, 2026
+
+With explicit approval for at most one beta credit, the same Copilot session
+completed the remaining steps using the existing, unexpired exact-file upload:
+
+1. Rechecked live readiness, credits and preflight; preflight remained valid for
+   400 rows, six columns and `generic_refit`.
+2. Obtained a fresh one-credit quote because the prior day's quote had expired.
+   Every public contract field was preserved. A stable quote key and a separate
+   stable submission key were used.
+3. Submitted once, checked the audit's completion, and retrieved the actual result
+   and receipt. No second evaluation was created.
+4. Read the exact `result.report` string from Copilot's saved MCP tool-result
+   JSON artifact and wrote its UTF-8 bytes directly into a private report file,
+   without a model reconstruction, line-ending conversion or added newline.
+5. Ran the public `hash_report.py --text-file` utility on that actual file. The
+   saved text was 2,332 bytes; its independently computed SHA-256 was sent to
+   `verify_audit_report` with `representation: report_text`. The service returned
+   **`digest_match`** for the same audit.
+6. Compared actual before/after credit responses: exactly **one beta credit
+   consumed**, one fewer available, and **zero reserved** after completion.
+
+The report and receipt were saved in an owner-only private directory outside
+this repository; no audit or input was deleted. Save artifacts before the input
+retention expires—evaluation completion does not reset the retention clock.
+Raw responses, account/audit/quote IDs, absolute balances and reports are excluded
+from public evidence. The result remains a synthetic feature-quality opinion;
+fingerprint consistency does not establish correctness or real-world value.
+
+This check verified report **text**, not an original downloaded result-JSON file.
+The existing connector did not gain a hosted download feature. To reproduce the
+save step, use the client's exact tool-result artifact when available, parse its
+returned report string, and write UTF-8 bytes directly; do not copy a rendered
+chat bubble. Client-specific artifact paths are private and vary by session.
 
 ### Upload the configured file directly
 

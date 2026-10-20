@@ -34,13 +34,13 @@ matching email strings alone do not establish the same identity.
 
 ## Which clients have been checked?
 
-Recorded October 19, 2026. These checks describe the tested client and surface.
+Recorded October 20, 2026. These checks describe the tested client and surface.
 
 | Client | Verified connection | Remaining checks |
 | --- | --- | --- |
 | ChatGPT | Authenticated calls; an approved synthetic evaluation completed | Public plugin approval remains separate |
 | [Codex CLI 0.163.0 on macOS](codex.md) | Browser sign-in and protected calls through managed MCP; synthetic evaluation and report-text verification | Completed model-driven conversation, refresh and new-account onboarding |
-| [GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS](copilot.md) | Browser sign-in and protected calls; exact-file synthetic upload, preflight and quote with the local adapter | Evaluation/result retrieval; native refresh and new-account onboarding |
+| [GitHub Copilot 0.65.0 in VS Code 1.137.0 on macOS](copilot.md) | Browser sign-in and protected calls; model-driven exact-file synthetic upload, preflight, approved one-credit evaluation, report/receipt retrieval and local report-text SHA verification | Native refresh, new-account onboarding and other evaluation paths |
 | [Hosted Claude web connection](claude.md) | Browser sign-in, authenticated discovery/readiness and refresh-token issuance | Actual refresh exchange, evaluation workflow and directory credential coordination |
 | Claude Code | Public plugin files and instructions available | Its own authenticated connection rehearsal |
 

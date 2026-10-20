@@ -52,17 +52,17 @@ tested status for each client and the separate approval for evaluation spending.
 ## Integration status
 
 The [coding-agent guides](docs/coding-agents.md) separate runnable local exercises
-from hosted connection tests. As of October 19, 2026, the tested scope is:
+from hosted connection tests. As of October 20, 2026, the tested scope is:
 
 | Path | Completed | Remaining |
 | --- | --- | --- |
 | [Codex CLI 0.163.0, macOS](docs/codex.md) | Sign-in; synthetic upload, preflight, approved one-credit evaluation, result/receipt retrieval and report-text fingerprint verification through its managed MCP connection | A complete model-driven conversation, token refresh and new-account onboarding |
-| [Copilot 0.65.0 / VS Code 1.137.0, macOS](docs/copilot.md) | Sign-in; model-driven exact-file upload, valid preflight and a one-credit quote using the included [local file adapter](docs/copilot.md#upload-the-configured-file-directly) | Evaluation submission and result retrieval; new-account onboarding |
+| [Copilot 0.65.0 / VS Code 1.137.0, macOS](docs/copilot.md) | Sign-in; model-driven exact-file upload, valid preflight, approved one-credit evaluation, report/receipt retrieval and local report-text SHA-256 verification using the [file adapter](docs/copilot.md#upload-the-configured-file-directly) | New-account onboarding; other Copilot environments |
 | [Optional Copilot refresh helper](docs/copilot.md#copilot-refresh-helper-tested-alternative) | Two real refresh exchanges, credential rotation and successful calls after restart | Natural-expiry renewal and long-running sessions; native VS Code refresh is separate and unverified |
 | [Hosted Claude web connection](docs/claude.md) | Browser sign-in, authenticated discovery/readiness and refresh-token issuance | Actual refresh exchange, evaluation workflow and directory credential coordination; Claude Code needs its own sign-in test |
 
-The Codex evaluation consumed exactly one beta credit. The Copilot rehearsal
-stopped at its quote and consumed none. These are synthetic workflow tests,
+The Codex and Copilot evaluations each consumed exactly one beta credit. The
+earlier Copilot upload/quote-only rehearsal consumed none. These are synthetic workflow tests,
 not evidence of real-world predictive performance or universal client support.
 Private reports, credentials and account identifiers are excluded from this repo.
 
